@@ -1,0 +1,42 @@
+
+body{
+    width: 920px;
+}
+
+.column {
+    float: left;
+    padding: 10px;
+    width: 100px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    display: table;
+    clear: both;
+}
+
+.row{
+    display: inline-block;
+    margin-bottom: 150px;
+}
+
+.card {
+    display: block;
+    margin-bottom: -100%;
+}
+
+.movable {
+    position: relative;
+    cursor: pointer;
+}
+.invisible {
+    display: none;
+}
+
+.card img{
+    width: 100px;
+}
+
+.margin-left{
+    margin-left: 360px;
+}

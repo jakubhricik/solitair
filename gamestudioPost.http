@@ -1,0 +1,99 @@
+
+POST http://localhost:8080/api/comment
+Content-Type: application/json
+
+{
+  "game" : "solitaire",
+  "player" : "superman",
+  "comment" : "kratka hra",
+  "commentedOn" : "2021-03-30T21:31:00"
+}
+
+###
+POST http://localhost:8080/api/comment
+Content-Type: application/json
+
+{
+  "game" : "solitaire",
+  "player" : "player2",
+  "comment" : "neviem to hrat , nuda..",
+  "commentedOn" : "2021-03-30T21:31:51"
+}
+
+###
+POST http://localhost:8080/api/comment
+Content-Type: application/json
+
+{
+  "game" : "solitaire",
+  "player" : "player1",
+  "comment" : "super hra...",
+  "commentedOn" : "2021-03-30T21:31:50"
+}
+
+###
+POST http://localhost:8080/api/score
+Content-Type: application/json
+
+{
+  "game" : "solitaire",
+  "player" : "player1",
+  "points" : 187,
+  "playedOn" : "2021-03-30T21:31:51"
+}
+
+###
+POST http://localhost:8080/api/score
+Content-Type: application/json
+
+{
+  "game" : "solitaire",
+  "player" : "player1",
+  "points" : 18557,
+  "playedOn" : "2021-03-30T21:31:50"
+}
+
+###
+POST http://localhost:8080/api/score
+Content-Type: application/json
+
+{
+  "game" : "solitaire",
+  "player" : "superman",
+  "points" : 1002,
+  "playedOn" : "2021-03-30T21:31:00"
+}
+
+###
+POST http://localhost:8080/api/rating
+Content-Type: application/json
+
+{
+  "game" : "solitaire",
+  "player" : "superman",
+  "rating" : 1,
+  "ratingOn" : "2021-03-30T21:31:00"
+}
+
+###
+POST http://localhost:8080/api/rating
+Content-Type: application/json
+
+{
+  "game" : "solitaire",
+  "player" : "player",
+  "rating" : 4,
+  "ratingOn" : "2021-03-30T21:31:50"
+}
+
+###
+POST http://localhost:8080/api/rating
+Content-Type: application/json
+
+{
+"game" : "solitaire",
+  "player" : "player2",
+  "rating" : 2,
+  "ratingOn" : "2021-03-30T21:31:51"
+}
+

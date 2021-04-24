@@ -1,0 +1,16 @@
+GET http://localhost:8080/api/score/solitaire
+Accept: application/json
+
+###
+GET http://localhost:8080/api/rating/solitaire/
+Accept: application/json
+
+###
+GET http://localhost:8080/api/rating/solitaire/superman
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/comment/solitaire/
+Accept: application/json
+###

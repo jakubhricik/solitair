@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solitaire</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+
+<body>
+<h1>Welcome to <a href="/">GameStudio</a>!</h1>
+<h2>Solitaire</h2>
+
+<a href="/solitaire/new">New Game</a><br/>
+
+<div class="row">
+    <span th:utext = "${@solitaireController.htmlStockAndTalon}"/>
+    <span th:utext = "${@solitaireController.htmlFoundations}"/>
+</div>
+
+
+<div class="row">
+    <span th:utext = "${@solitaireController.htmlTableau}"/>
+</div>
+
+
+</body>
+
+<script src="/js/dragDrop.js"></script>
+</html>
