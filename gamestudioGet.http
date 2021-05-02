@@ -14,3 +14,11 @@ Accept: application/json
 GET http://localhost:8080/api/comment/solitaire/
 Accept: application/json
 ###
+
+GET http://localhost:8080/api/user/maros
+Accept: application/json
+###
+
+GET http://localhost:8080/api/user/jakub/jakub
+Accept: application/json
+###

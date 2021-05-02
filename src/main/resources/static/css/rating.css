@@ -1,0 +1,87 @@
+.rating{
+    width: 200px;
+    height: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label{
+    position: relative;
+    bottom: 20px;
+    width: 1em;
+    font-size: 40px;
+    color: #f5e807;
+    cursor: pointer;
+}
+
+body.dark-mode .rating>label{
+    color: #f5e807;
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0;
+    transition: ease-in-out 0.2s;
+
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important;
+    transition: ease-in-out 0.2s;
+}
+
+.rating>input:checked~label:before {
+    opacity: 1;
+    transition: ease-in-out 0.2s;
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4;
+    transition: ease-in-out 0.2s;
+}
+
+.star{
+    width: 1em;
+    font-size: 20px;
+    color: orange;
+    opacity: 1;
+    transition: ease-in-out 0.2s;
+}
+.filedStar::before{
+    content: "\2605";
+    position: absolute;
+    opacity: 1;
+}
+
+.rating.not-allowed>label{
+    color: rgba(245, 166, 7, 0.71);
+}
+
+.tooltipCustom{
+    height: 20px;
+    display: flex;
+    opacity: 0;
+    margin-left: 5px;
+    transition: ease-in-out 0.3s;
+}
+
+.rating:hover>.tooltipCustom{
+    opacity: 1;
+    transition: ease-in-out 0.3s;
+}
+
+@media only screen and (max-width : 768px) {
+    .rating>label {
+        font-size: 20px;
+        bottom: 0;
+    }
+}
+
+

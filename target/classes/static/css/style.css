@@ -1,42 +1,193 @@
 
+
+:root {
+    --backgroundLight: #f2f6fc;
+    --backgroundDark: rgba(34,39,46,0.95);
+
+    --textLight: #212529;
+    --textDark: #ced4da;
+
+    --secondaryLight: #ced4da;
+    --secondaryDark: #373e47;
+
+    --primariDark: rgb(83, 155, 245);
+
+}
+
+
 body{
-    width: 920px;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--textLight);
+    text-align: left;
+    background-color: var(--backgroundLight);
+
+    font-family: "Metropolis", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-.column {
-    float: left;
+body.dark-mode{
+    color: var(--textDark);
+    background-color: var(--backgroundDark);
+}
+
+
+body.dark-mode label,
+body.dark-mode h5{
+    color: var(--secondaryDark);
+}
+
+#GameStudio{
+    margin: 10px;
+    height: 50px;
+}
+
+.master-header,
+.footer{
+    background-color: var(--backgroundLight);
+    border-bottom: var(--secondaryLight) 2px solid;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+}
+
+
+.footer{
+    border-radius: 5px;
+}
+
+
+.master-header.dark-mode,
+body.dark-mode .game-control-header,
+body.dark-mode .footer{
+    color: var(--textDark);
+    background-color: var(--secondaryDark);
+    border-bottom: none;
+    box-shadow: none;
+}
+.master-header.dark-mode .navbar-brand{
+    color: #ced4da ;
+}
+.master-header.dark-mode .navbar-brand img{
+    border-radius: 50%;
     padding: 10px;
-    width: 100px;
+    background-color: #ced4da;
+    box-shadow: 0 0.15rem 1.75rem -9px rgba(198, 204, 212, 0.93);
 }
 
-/* Clear floats after the columns */
-.row:after {
-    display: table;
-    clear: both;
+.master-header.dark-mode a.dark-mode-allowed {
+    color: #dee2e6;
 }
 
-.row{
+.game-control-header{
+    background-color: #f8f9fa;
+    border-bottom: solid 2px #6c757d;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+    padding: 10px 30px;
+    margin-top: 20px;
+}
+
+body.dark-mode .game-control-header label{
+    color: #ced4da;
+}
+
+body.dark-mode .game-control-header .badge{
+    color: var(--textLight);
+}
+
+.progress{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    height: 8px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+    background-color: white;
+}
+body.dark-mode .progress{
+    background-color: var(--backgroundDark);
+}
+
+
+.gameName{
+    line-height: normal;
+    font-size: 2.25rem;
+    font-weight: 500;
     display: inline-block;
-    margin-bottom: 150px;
+    align-items: center;
+    margin-bottom: 0;
+    margin-top: 20px;
 }
 
-.card {
-    display: block;
-    margin-bottom: -100%;
+body.dark-mode .gameName{
+    color: var(--primariDark);
 }
 
-.movable {
+.page-header-subtitle{
+    color: var(--secondaryDark);
+    font-size: 1.15rem;
+    margin-top: 0.25rem;
+}
+
+body.dark-mode .page-header-subtitle{
+    color: var(--textDark);
+}
+
+
+
+.gameRating{
+    margin-left: 10px;
+    display: inline-block;
     position: relative;
-    cursor: pointer;
-}
-.invisible {
-    display: none;
+    bottom: 3px;
 }
 
-.card img{
-    width: 100px;
+.content{
+    width: 920px;
+    margin: 0 auto;
 }
 
-.margin-left{
-    margin-left: 360px;
+
+ #logIn{
+     float: right;
+ }
+
+ #navbarNavDropdown{
+     display: inline-block;
+     float: left;
+ }
+
+ .logForm label{
+     display: block;
+ }
+
+ .logForm input{
+     display: block;
+     width: 100%;
+ }
+
+ #logOut #userButton{
+     width: 50px;
+ }
+
+ #LogOutMenu{
+     right: -7px;
+     top: -5px;
+ }
+
+ .userName{
+    text-align: center;
+    font-weight: bold;
+     font-size: large;
+ }
+
+
+ .shadow{
+     box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+ }
+
+@media (max-width: 992px) {
+    .content{
+        width: 100%;
+    }
 }

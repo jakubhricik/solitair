@@ -11,12 +11,14 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.web.client.RestTemplate;
 import sk.tuke.kpi.kp.gamestudio.game.solitaire.consoleUi.ConsoleUi;
 import sk.tuke.kpi.kp.gamestudio.game.solitaire.core.GameBoard;
+import sk.tuke.kpi.kp.gamestudio.service.JPA.UserServiceJPA;
 import sk.tuke.kpi.kp.gamestudio.service.REST.CommentServiceRestClient;
 import sk.tuke.kpi.kp.gamestudio.service.REST.RatingServiceRestClient;
 import sk.tuke.kpi.kp.gamestudio.service.REST.ScoreServiceRestClient;
 import sk.tuke.kpi.kp.gamestudio.service.interfaces.CommentService;
 import sk.tuke.kpi.kp.gamestudio.service.interfaces.RatingService;
 import sk.tuke.kpi.kp.gamestudio.service.interfaces.ScoreService;
+import sk.tuke.kpi.kp.gamestudio.service.interfaces.UserService;
 
 @SpringBootApplication
 @Configuration
@@ -60,6 +62,11 @@ public class SpringClient {
     public CommentService commentService() {
 //        return new CommentServiceJPA();
         return new CommentServiceRestClient();
+    }
+
+    @Bean
+    public UserService userService(){
+        return new UserServiceJPA();
     }
 
     @Bean

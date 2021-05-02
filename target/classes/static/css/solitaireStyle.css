@@ -1,0 +1,132 @@
+
+.card {
+    display: flex;
+    margin-bottom: -100%;
+    background-color: rgba(33, 40, 50, 0);
+    border: none;
+}
+
+.sideCard{
+    display: block;
+    z-index: -10;
+    background-color: rgba(33, 40, 50, 0);
+}
+
+.sideCard.col{
+    position: absolute;
+    width: 1px;
+}
+
+.movable {
+    position: relative;
+    cursor: pointer;
+}
+.invisible {
+    display: none;
+}
+
+.card img,
+.sideCard img{
+    width: 100px;
+    border: #212529 2px solid;
+    border-radius: 5px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+}
+
+#UpperSiteBoard{
+    margin-bottom: 100px;
+    margin-top: 30px;
+}
+
+#tableauBoard{
+    margin-bottom: 100px;
+}
+
+.col{
+    max-width: 100px;
+    margin-right: 10px;
+    min-height: 100px;
+    height: 100px;
+}
+
+
+
+@media (min-width: 500px) {
+    .card img,
+    .sideCard img{
+        width: 60px;
+    }
+    .sideCard{
+        margin-bottom: -88px;
+    }
+    .col{
+        width: 60px;
+        margin-right: 4px;
+    }
+    .col-sm-4{
+        max-width: 250px;
+        margin-right: 0;
+    }
+    .col-sm-8{
+        max-width: 300px;
+    }
+
+}
+
+
+@media (min-width: 576px) {
+    .card img,
+    .sideCard img{
+        width: 63px;
+    }
+    .sideCard{
+        margin-bottom: -93px;
+    }
+    .col{
+        width: 63px;
+        margin-right: 5px;
+    }
+    .col-sm-4{
+        width: 230px;
+    }
+
+
+}
+
+@media (min-width: 768px) {
+    .card img,
+    .sideCard img{
+        width: 80px;
+    }
+    .sideCard{
+        margin-bottom: -118px;
+    }
+    .col{
+        width: 80px;
+        margin-right: 8px;
+    }
+    .col-sm-4{
+        width: 300px;
+    }
+    .col-sm-8{
+        max-width: 400px;
+    }
+}
+@media (min-width: 992px) {
+    .card img,
+    .sideCard img{
+        width: 90px;
+    }
+    .sideCard{
+        margin-bottom: -133px;
+    }
+    .col{
+        width: 90px;
+    }
+    .col-sm-4{
+        max-width: 300px;
+    }
+    .col-sm-8{
+        max-width: 400px;
+    }
+}

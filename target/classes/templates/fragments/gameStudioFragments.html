@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="userController" type="sk.tuke.kpi.kp.gamestudio.server.controller.UserController"*/-->
+<!--/*@thymesVar id="solitaireController" type="sk.tuke.kpi.kp.gamestudio.server.controller.SolitaireController"*/-->
+
+<div th:fragment="header">
+
+  <nav class="navbar master-header navbar-light">
+    <div class="container">
+      <a href="/" class="navbar-brand">
+        <img id="GameStudio" src="/images/GameStudio.svg" alt="brand logo">
+        GameStudio
+      </a>
+      <span th:replace="/fragments/fragment::loginButtons(urlAddress = '/')"/>
+    </div>
+  </nav>
+
+</div>
+
+
+</html>

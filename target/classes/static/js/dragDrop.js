@@ -1,19 +1,36 @@
-const movables = document.querySelectorAll('.movable');
-const dropAbles = document.querySelectorAll('.dropAble');
+
+let movables ;
+let dropAbles ;
 
 
-// Fill listeners
-for ( const card of movables){
-    card.addEventListener('dragstart', dragStart);
-    card.addEventListener('dragend', dragEnd);
+function reinitialize(){
+    movables =  document.querySelectorAll('.movable');
+    dropAbles = document.querySelectorAll('.dropAble');
+
+    // Fill listeners
+    for ( const card of movables){
+        card.addEventListener('dragstart', dragStart);
+        card.addEventListener('dragend', dragEnd);
+    }
+
+    for ( const stack of dropAbles){
+        stack.addEventListener('dragover', dragOver);
+        stack.addEventListener('dragenter', dragEnter);
+        stack.addEventListener('dragleave', dragLeave);
+        stack.addEventListener('drop', dragDrop);
+    }
+    const sideCard = document.getElementsByClassName('sideCard');
+    let numOfSideCard = 1;
+    for( const card of sideCard){
+        card.style.marginLeft = - 90 + numOfSideCard * 15 + 'px';
+        card.style.zIndex = '-' +  numOfSideCard;
+        numOfSideCard = numOfSideCard + 1;
+    }
+
+    changePercentage();
+    changeColHeight();
 }
 
-for ( const stack of dropAbles){
-    stack.addEventListener('dragover', dragOver);
-    stack.addEventListener('dragenter', dragEnter);
-    stack.addEventListener('dragleave', dragLeave);
-    stack.addEventListener('drop', dragDrop);
-}
 
 let sourcePile = 'none';
 let destinationPile = 'none';
@@ -26,7 +43,7 @@ function dragStart() {
     sourcePile = getPileName(this.className);
     numberOfCards = getNumberOfDraggedCards(this.className);
 
-    setTimeout(() => (this.style.display = 'none'), 0);
+    setTimeout(() => (this.style.visibility = 'hidden'), 0);
 
     if (numberOfCards > 1){
         for (const card of movables){
@@ -38,15 +55,12 @@ function dragStart() {
                 }
             }
         }
-
-    }else{
-        setTimeout(() => (this.style.display = 'none'), 0);
     }
 }
 
 function dragEnd() {
     for (const card of movables){
-        card.style.display = 'block';
+        card.style.visibility = 'visible';
     }
 }
 
@@ -57,7 +71,6 @@ function dragOver(e){
 function dragEnter(e){
     e.preventDefault();
     destinationPile= getPileName(this.className);
-    console.log(destinationPile);
 }
 
 function dragLeave(){
@@ -65,7 +78,7 @@ function dragLeave(){
 }
 
 function dragDrop(){
-    location.href = "/solitaire?move=true&sourcePile=" + sourcePile + "&destinationPile=" + destinationPile + "&numberOfCards=" + numberOfCards;
+    moveCards(sourcePile, destinationPile, numberOfCards);
 }
 
 function getPileName(className){

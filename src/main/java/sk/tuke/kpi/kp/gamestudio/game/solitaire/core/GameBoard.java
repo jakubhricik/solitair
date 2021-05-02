@@ -180,7 +180,7 @@ public class GameBoard implements Serializable{
                 tableau[destinationPile].push(helpStack.pop());
             }
         } else if (helpStack.peek().getRank().getValue() == tableau[destinationPile].peek().getRank().getValue() - 1
-                && helpStack.peek().getSuit().getColor() != tableau[destinationPile].peek().getSuit().getColor()) {
+                && helpStack.peek().getSuit() != tableau[destinationPile].peek().getSuit()) {
             while (!helpStack.isEmpty()) {
                 tableau[destinationPile].push(helpStack.pop());
             }
@@ -217,7 +217,7 @@ public class GameBoard implements Serializable{
             topFoundationPileCard = foundations[foundationPile].peek();
 
             if (topFoundationPileCard.getRank().getValue() == topTableauPileCard.getRank().getValue() - 1
-                    && topFoundationPileCard.getSuit().getColor() == topTableauPileCard.getSuit().getColor()) {
+                    && topFoundationPileCard.getSuit() == topTableauPileCard.getSuit()) {
                 moveCard(tableau[tableauPile], foundations[foundationPile]);
             } else {
                 throw new IllegalStateException("Cannot move tableau card to foundation pile " + foundationPile);

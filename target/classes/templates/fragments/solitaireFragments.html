@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="userController" type="sk.tuke.kpi.kp.gamestudio.server.controller.UserController"*/-->
+<!--/*@thymesVar id="solitaireController" type="sk.tuke.kpi.kp.gamestudio.server.controller.SolitaireController"*/-->
+
+<div th:fragment="header">
+  <nav class="navbar master-header navbar-light">
+      <div class="container">
+          <a href="/" class="navbar-brand">
+              <img id="GameStudio" src="/images/GameStudio.svg" alt="brand logo">
+              GameStudio
+          </a>
+          <span style="display: inline-block" th:replace="/fragments/fragment::loginButtons(urlAddress = '/solitaire')"/>
+      </div>
+  </nav>
+
+
+</div>
+
+<div th:fragment="game-head" >
+    <div class="gameHead container" >
+        <h2 class="gameName">Solitaire</h2>
+        <span th:replace="/fragments/ratingFragment::average-rating"/>
+    </div>
+    <p class="page-header-subtitle">Game made by <b>Jakub Hricik</b></p>
+</div>
+
+<div th:fragment="game-controller" class="container">
+    <nav class="navbar game-control-header navbar-dark" >
+        <div class="btn-group" role="group">
+            <button type="button" onclick="startNewGame()" class="btn btn-danger">New Game <img src="/images/icons/repeat-icon.png" width="20px"></button>
+            <button type="button" id="UndoButton" onclick="undo()" class="btn btn-success disabled">Undo <img src="/images/icons/back-icon.png" width="20px"></button>
+            <button type="button" onclick="changeCardsTheme()" class="btn btn-primary">Theme <img src="/images/icons/brush-icon.png" width="20px"></button>
+        </div>
+
+        <span th:if="${@userController.logged}">
+        <div th:replace="fragments/ratingFragment::rating-form(url = '/solitaire' ,game = 'solitaire', player = ${@userController.loggedUser().login})"/>
+      </span>
+
+        <span th:if="not ${@userController.logged}">
+        <span th:replace="fragments/ratingFragment::disabled-rating" />
+      </span>
+
+        <div class="form-check form-switch">
+            <input class="form-check-input" onclick="toggleHardMode()" type="checkbox" id="hardModeCheckbox">
+            <label class="form-check-label" for="hardModeCheckbox">Hard Mode</label>
+        </div>
+    </nav>
+    <div class="progress">
+        <div id="GameProgressBar" class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" ></div>
+    </div>
+</div>
+
+
+</html>
