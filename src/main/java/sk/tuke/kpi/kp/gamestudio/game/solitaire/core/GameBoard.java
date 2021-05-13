@@ -1,5 +1,6 @@
 package sk.tuke.kpi.kp.gamestudio.game.solitaire.core;
 
+import org.springframework.http.server.DelegatingServerHttpResponse;
 import sk.tuke.kpi.kp.gamestudio.game.solitaire.core.enums.GameState;
 import sk.tuke.kpi.kp.gamestudio.game.solitaire.core.enums.Rank;
 import sk.tuke.kpi.kp.gamestudio.game.solitaire.core.enums.StackType;
@@ -30,11 +31,11 @@ public class GameBoard implements Serializable{
     private final CardStack[] tableau;
 
     private GameBoard savedState;
-    private int savedScore = 100000;
+    private int savedScore = 10000;
 
     private final Random random = new Random();
 
-    private long startMillis;
+    private int countOfPlayerInteractions;
     private boolean gameStarted;
 
 
@@ -179,15 +180,18 @@ public class GameBoard implements Serializable{
             while (!helpStack.isEmpty()) {
                 tableau[destinationPile].push(helpStack.pop());
             }
+            countOfPlayerInteractions++;
         } else if (helpStack.peek().getRank().getValue() == tableau[destinationPile].peek().getRank().getValue() - 1
                 && helpStack.peek().getSuit() != tableau[destinationPile].peek().getSuit()) {
             while (!helpStack.isEmpty()) {
                 tableau[destinationPile].push(helpStack.pop());
             }
+            countOfPlayerInteractions++;
         } else {
             while (!helpStack.isEmpty()) {
                 tableau[fromPile].push(helpStack.pop());
             }
+            countOfPlayerInteractions++;
         }
         if (!tableau[fromPile].isEmpty()) tableau[fromPile].peek().setFacingUp(true);
     }
@@ -365,6 +369,7 @@ public class GameBoard implements Serializable{
         //move card from talon to tableau
         Card chosenCard = from.pop();
         destination.push(chosenCard);
+        countOfPlayerInteractions++;
     }
 
 
@@ -390,6 +395,7 @@ public class GameBoard implements Serializable{
             pickedCard.setFacingUp(true);
             talon.push(pickedCard);
         }
+        countOfPlayerInteractions++;
     }
 
     /**
@@ -570,7 +576,7 @@ public class GameBoard implements Serializable{
     public static GameBoard loadGame() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SAVED_GAME))) {
             GameBoard loadedGame = (GameBoard) ois.readObject();
-            loadedGame.startMillis = System.currentTimeMillis();
+            loadedGame.countOfPlayerInteractions = 0;
             return loadedGame;
         } catch (Exception e) {
             throw new GamestudioException("Error loading game", e);
@@ -585,7 +591,7 @@ public class GameBoard implements Serializable{
         if (!gameStarted) {
             gameStarted = true;
             gameState = GameState.PLAYING;
-            startMillis = System.currentTimeMillis();
+            countOfPlayerInteractions = 0;
         }
     }
 
@@ -624,7 +630,13 @@ public class GameBoard implements Serializable{
     }
 
     public int getScore() {
-        int result = savedScore - (int) (System.currentTimeMillis() - startMillis) / 1000;
+        int result;
+
+        if(isHardMode())
+            result =  savedScore - (2 * countOfPlayerInteractions);
+        else
+            result =  savedScore - (5 * countOfPlayerInteractions);
+
         if (result < 0) result = 0;
         return result;
     }

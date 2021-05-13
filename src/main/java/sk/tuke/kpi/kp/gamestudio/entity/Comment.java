@@ -10,13 +10,13 @@ import javax.persistence.NamedQuery;
 //    public static final String SELECT = "SELECT game, player, comment, commentedOn FROM comment WHERE game = ? LIMIT 10";
 
 @Entity
-@NamedQuery( name = "Comment.getLastComments",
-        query = "SELECT c FROM Comment c WHERE c.game=:game")
+@NamedQuery(name = "Comment.getLastComments",
+        query = "SELECT c FROM Comment c WHERE c.game=:game ORDER BY c.commentedOn DESC")
 
-@NamedQuery( name = "Comment.resetComment",
+@NamedQuery(name = "Comment.resetComment",
         query = "DELETE FROM Comment")
 
-public class Comment{
+public class Comment {
 
     @Id
     @GeneratedValue
@@ -30,9 +30,10 @@ public class Comment{
 
     private Date commentedOn;
 
-    public Comment(){}
+    public Comment() {
+    }
 
-    public Comment(String game, String player, String comment, Date commentedOn) throws IllegalArgumentException{
+    public Comment(String game, String player, String comment, Date commentedOn) throws IllegalArgumentException {
         this.game = game;
         this.player = player;
         setComment(comment);
@@ -60,9 +61,9 @@ public class Comment{
     }
 
     public void setComment(String comment) {
-        if(comment.length() > 1024){
+        if (comment.length() > 1024) {
             throw new IllegalArgumentException("Comment is too long.");
-        } else if(comment.length() == 0) {
+        } else if (comment.length() == 0) {
             throw new IllegalArgumentException("There is no comment.");
         }
         this.comment = comment;
@@ -76,9 +77,13 @@ public class Comment{
         this.commentedOn = commentedOn;
     }
 
-    public int getIdent() { return ident; }
+    public int getIdent() {
+        return ident;
+    }
 
-    public void setIdent(int ident) { this.ident = ident; }
+    public void setIdent(int ident) {
+        this.ident = ident;
+    }
 
     @Override
     public String toString() {

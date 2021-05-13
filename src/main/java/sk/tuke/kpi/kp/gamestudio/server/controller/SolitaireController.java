@@ -11,22 +11,14 @@ import org.springframework.web.context.WebApplicationContext;
 import sk.tuke.kpi.kp.gamestudio.game.solitaire.core.Card;
 import sk.tuke.kpi.kp.gamestudio.game.solitaire.core.CardStack;
 import sk.tuke.kpi.kp.gamestudio.game.solitaire.core.GameBoard;
+import sk.tuke.kpi.kp.gamestudio.game.solitaire.core.enums.GameState;
 import sk.tuke.kpi.kp.gamestudio.game.solitaire.core.enums.StackType;
-import sk.tuke.kpi.kp.gamestudio.service.interfaces.CommentService;
-import sk.tuke.kpi.kp.gamestudio.service.interfaces.RatingService;
-import sk.tuke.kpi.kp.gamestudio.service.interfaces.ScoreService;
 
 
 @Controller
 @RequestMapping("/solitaire")
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class SolitaireController {
-    @Autowired
-    private ScoreService scoreService;
-    @Autowired
-    private CommentService commentService;
-    @Autowired
-    private RatingService ratingService;
 
     private GameBoard gameBoard = new GameBoard();
     private Boolean isGameStarted = false;
@@ -40,22 +32,20 @@ public class SolitaireController {
 
     @RequestMapping
     public String solitaire() {
-        if (!isGameStarted) {
+        if (!isGameStarted)
             gameBoard.startGame();
-            reinitializeStacks();
-        }
         reinitializeStacks();
         return "solitaire";
     }
 
     @RequestMapping("/hardMode")
     @ResponseBody
-    public String hardMode(){
-        if(gameBoard.isHardMode()){
+    public String hardMode() {
+        if (gameBoard.isHardMode()) {
             gameBoard = new GameBoard();
             isGameStarted = true;
             gameBoard.startGame();
-        }else{
+        } else {
             gameBoard = new GameBoard();
             isGameStarted = true;
             gameBoard.setHardMode(true);
@@ -76,7 +66,8 @@ public class SolitaireController {
     @RequestMapping(value = "/undo", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String undo() {
-        gameBoard.quickLoad();
+        if (gameBoard.getGameState() != GameState.SOLVED)
+            gameBoard.quickLoad();
         return getHtmlGameBoard();
     }
 
@@ -98,23 +89,23 @@ public class SolitaireController {
         StringBuilder sb = new StringBuilder();
 
         sb.append("<div id='UpperSiteBoard'>\n");
-            sb.append("<div class='row'>\n");
-                sb.append("<div class='col-sm-4'>\n");
-                    sb.append("<div class='row' id='StockTalonBoard'>\n");
-                        sb.append(getHtmlStockAndTalon());
-                    sb.append("</div>\n");
-                sb.append("</div>\n");
+        sb.append("<div class='row'>\n");
+        sb.append("<div class='col-sm-4'>\n");
+        sb.append("<div class='row' id='StockTalonBoard'>\n");
+        sb.append(getHtmlStockAndTalon());
+        sb.append("</div>\n");
+        sb.append("</div>\n");
 
-                sb.append("<div class='col-sm-8'>\n");
-                    sb.append("<div class='row' id='FoundationsBoard' >\n");
-                        sb.append(getHtmlFoundations());
-                    sb.append("</div>\n");
-                sb.append("</div>\n");
-            sb.append("</div>\n");
+        sb.append("<div class='col-sm-8'>\n");
+        sb.append("<div class='row' id='FoundationsBoard' >\n");
+        sb.append(getHtmlFoundations());
+        sb.append("</div>\n");
+        sb.append("</div>\n");
+        sb.append("</div>\n");
         sb.append("</div>\n");
 
         sb.append("<div id='tableauBoard'  class=\"row\">\n");
-            sb.append(getHtmlTableau());
+        sb.append(getHtmlTableau());
         sb.append("</div>\n");
 
         return sb.toString();
@@ -128,12 +119,13 @@ public class SolitaireController {
             @RequestParam(required = false) Integer numberOfCards
     ) {
         try {
-            if (numberOfCards > 1) {
-                moveCardsInTableau(sourcePile, destinationPile, numberOfCards);
-            } else {
-                moveOneCard(sourcePile, destinationPile);
+            if (gameBoard.getGameState() != GameState.SOLVED) {
+                if (numberOfCards > 1) {
+                    moveCardsInTableau(sourcePile, destinationPile, numberOfCards);
+                } else {
+                    moveOneCard(sourcePile, destinationPile);
+                }
             }
-
         } catch (Exception e) {
             //tato vynimka znamena, ze neprisli parametre pre move
             //vynimka je nepodstatna
@@ -195,21 +187,21 @@ public class SolitaireController {
         return sb.toString();
     }
 
-
     @RequestMapping(value = "/deal", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String dealCard() {
         gameBoard.quickSave();
         try {
-            if (gameBoard.getStock().isEmpty()){
-                gameBoard.reloadStock();
-                cardsInTalon = 0;
-            }
-            else {
-                if(gameBoard.isHardMode()){
-                    cardsInTalon = Math.min(stock.getSize(), 3);
-                }else cardsInTalon = 1;
-                gameBoard.deal();
+            if (gameBoard.getGameState() != GameState.SOLVED) {
+                if (gameBoard.getStock().isEmpty()) {
+                    gameBoard.reloadStock();
+                    cardsInTalon = 0;
+                } else {
+                    if (gameBoard.isHardMode()) {
+                        cardsInTalon = Math.min(stock.getSize(), 3);
+                    } else cardsInTalon = 1;
+                    gameBoard.deal();
+                }
             }
         } catch (Exception e) {
             // Tato vynimka znamena, ze neprisli parametre pre deal
@@ -218,7 +210,6 @@ public class SolitaireController {
         reinitializeStacks();
         return getHtmlStockAndTalon();
     }
-
 
     @RequestMapping(value = "/talonStock", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
@@ -238,7 +229,6 @@ public class SolitaireController {
         sb.append("</span>\n");
 
 
-
         try {
             Card stockTopCard = talon.peek();
             if (stockTopCard.isFacingUp()) {
@@ -256,11 +246,11 @@ public class SolitaireController {
         }
         sb.append("</span>\n");
 
-        if(gameBoard.isHardMode()){
+        if (gameBoard.isHardMode()) {
             if (talon.isEmpty()) cardsInTalon = 0;
             else if (talon.getSize() < 3) cardsInTalon = talon.getSize();
             sb.append("<div class = 'sideCards col'>\n");
-            for (int i = 0; i < cardsInTalon -1; i++){
+            for (int i = 0; i < cardsInTalon - 1; i++) {
                 sb.append("<span class = 'sideCard card' >\n");
                 sb.append("<img src=\"").append("/images/PaperCards/").append("CardBack").append(cardBack).append(".png\">");
                 sb.append("</span>\n");
@@ -272,23 +262,29 @@ public class SolitaireController {
         return sb.toString();
     }
 
-    @RequestMapping(value = "/gameProgressPercentage",  produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/gameProgressPercentage", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public String gameProgressPercentage(){
+    public String gameProgressPercentage() {
         reinitializeStacks();
         float totalCards = 0;
-        for (CardStack pile : foundations){
+        for (CardStack pile : foundations) {
             totalCards += pile.getSize();
         }
         float percentage = Math.round((totalCards / 52) * 100.0);
         return Float.toString(percentage);
     }
 
-    @RequestMapping(value = "/isHardMode",  produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/isHardMode", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public String isHardMode(){
-        if(gameBoard.isHardMode()) return "true";
+    public String isHardMode() {
+        if (gameBoard.isHardMode()) return "true";
         else return "false";
+    }
+
+    @RequestMapping(value = "/getCurrentScore", produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public String getCurrentScore() {
+        return Integer.toString(gameBoard.getScore());
     }
 
     private String getHtmlFoundations() {
@@ -335,8 +331,7 @@ public class SolitaireController {
 
         if (sourcePile.contains("talon")) {
             source = StackType.TALON;
-        }
-        else if (sourcePile.contains("tableau")) {
+        } else if (sourcePile.contains("tableau")) {
             source = StackType.TABLEAU;
             for (int i = 0; i < 7; i++) {
                 if (sourcePile.contains(Integer.toString(i))) sourcePileNum = i;
@@ -361,7 +356,7 @@ public class SolitaireController {
         }
         gameBoard.moveCard(source, sourcePileNum, destination, destinationPileNum);
         reinitializeStacks();
-        if(talon.getSize() < savedTalonCardsCount) cardsInTalon--;
+        if (talon.getSize() < savedTalonCardsCount) cardsInTalon--;
     }
 
     private void moveCardsInTableau(String sourcePile, String destinationPile, int numberOfCards) {

@@ -4,17 +4,17 @@ import javax.persistence.*;
 
 
 @Entity
-@NamedQuery( name = "User.resetUser",
+@NamedQuery(name = "User.resetUser",
         query = "DELETE FROM User")
-@NamedQuery( name = "User.isUserRegistered",
+@NamedQuery(name = "User.isUserRegistered",
         query = "select u from User u where u.login =: login")
-@NamedQuery( name = "User.isLogCorrect",
+@NamedQuery(name = "User.isLogCorrect",
         query = "select u from User u where u.login =: login AND u.password =: password")
-@NamedQuery( name = "User.getUser",
+@NamedQuery(name = "User.getUser",
         query = "select u from User u where u.login =: login AND u.password =: password")
-@NamedQuery( name = "User.changeLogin",
+@NamedQuery(name = "User.changeLogin",
         query = "update User u set u.login=:newLogin where u.login=:login")
-@NamedQuery( name = "User.changePassword",
+@NamedQuery(name = "User.changePassword",
         query = "update User u set u.password=:newPassword where u.login=:login and u.password=:password")
 @Table(name = "Player")
 public class User {
@@ -26,7 +26,8 @@ public class User {
     private String login;
     private String password;
 
-    public User(){}
+    public User() {
+    }
 
     public User(String login, String password) {
         this.login = login;

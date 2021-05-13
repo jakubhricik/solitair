@@ -12,17 +12,17 @@ public class UserServiceRest {
     private UserService userService;
 
     @GetMapping("/{login}")
-    public boolean isUserRegistered(@PathVariable String login){
+    public boolean isUserRegistered(@PathVariable String login) {
         return userService.isUserRegistered(login);
     }
 
     @GetMapping("/{login}/{password}")
-    public boolean getRating(@PathVariable String login, @PathVariable String password){
-        return userService.isLogCorrect(login,password);
+    public boolean getRating(@PathVariable String login, @PathVariable String password) {
+        return userService.isLogCorrect(login, password);
     }
 
     @PostMapping
-    public void addUser(@RequestBody User user){
+    public void addUser(@RequestBody User user) {
         userService.addUser(user);
     }
 

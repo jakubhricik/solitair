@@ -8,15 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
 
-
 @Entity
-@NamedQuery( name = "Rating.getAverageRating",
+@NamedQuery(name = "Rating.getAverageRating",
         query = "SELECT AVG(r.rating) FROM Rating r WHERE r.game=:game")
-@NamedQuery( name = "Rating.getRatingByName",
+@NamedQuery(name = "Rating.getRatingByName",
         query = "SELECT r.rating FROM Rating r WHERE r.game=:game AND r.player=:player")
-@NamedQuery( name = "Rating.updateRating",
+@NamedQuery(name = "Rating.updateRating",
         query = "DELETE FROM Rating r WHERE r.game=:game AND r.player=:player")
-@NamedQuery( name = "Rating.resetRating",
+@NamedQuery(name = "Rating.resetRating",
         query = "DELETE FROM Rating")
 
 public class Rating {
@@ -33,7 +32,8 @@ public class Rating {
 
     private Date ratingOn;
 
-    public Rating(){}
+    public Rating() {
+    }
 
     public Rating(String game, String player, int rating, Date ratingOn) {
         this.game = game;
@@ -63,7 +63,7 @@ public class Rating {
     }
 
     public void setRating(int rating) {
-        if(rating > 5) this.rating = 5;
+        if (rating > 5) this.rating = 5;
         else this.rating = Math.max(rating, 1);
     }
 
@@ -75,9 +75,13 @@ public class Rating {
         this.ratingOn = ratingOn;
     }
 
-    public int getIdent() { return ident; }
+    public int getIdent() {
+        return ident;
+    }
 
-    public void setIdent(int ident) { this.ident = ident; }
+    public void setIdent(int ident) {
+        this.ident = ident;
+    }
 
     @Override
     public String toString() {

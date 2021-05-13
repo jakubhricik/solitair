@@ -28,7 +28,7 @@ public class UserController {
     @RequestMapping("/login")
     public String login(@RequestParam(required = false) String url, String login, String password) {
         if (userService.isLogCorrect(login, password)) {
-            loggedUser = new User(login, password);
+            loggedUser = new User(login, null);
         }
         if (url != null) return "redirect:" + url;
         else return "redirect:/";
@@ -37,30 +37,29 @@ public class UserController {
     @RequestMapping("/register")
     public String register(@RequestParam(required = false) String url, String login, String password) {
 
-        if(login.length() > 3 && password.length() > 6){
-            if (! userService.isUserRegistered(login)) {
+        if (login.length() > 3 && password.length() > 6) {
+            if (!userService.isUserRegistered(login)) {
                 loggedUser = new User(login, password);
                 userService.addUser(loggedUser);
             }
         }
-
-        if(url != null) return "redirect:"+url;
+        if (url != null) return "redirect:" + url;
         else return "redirect:/";
     }
 
-    @RequestMapping(value ="/getUser" , produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/getUser", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public String getUser( @RequestParam String login, @RequestParam(required = false) String password){
+    public String getUser(@RequestParam String login, @RequestParam(required = false) String password) {
         User user = null;
-        try{
+        try {
             if (password != null)
                 user = userService.getUser(login, password);
             else {
-                if(userService.isUserRegistered(login))
+                if (userService.isUserRegistered(login))
                     return login;
             }
-        }catch(Exception e){
-            if(userService.isUserRegistered(login))
+        } catch (Exception e) {
+            if (userService.isUserRegistered(login))
                 return login;
         }
 
@@ -72,46 +71,51 @@ public class UserController {
     @RequestMapping("/changeUserName")
     public String changeUserName(@RequestParam(required = false) String url, String currentLogin, String currentPassword, String newLogin) {
 
-        if(newLogin.length() > 3 ){
+        if (newLogin.length() > 3) {
             if (userService.isLogCorrect(currentLogin, currentPassword)) {
-                if (userService.changeLogin(currentLogin, newLogin)){
+                if (userService.changeLogin(currentLogin, newLogin)) {
                     loggedUser = new User(newLogin, currentPassword);
                 }
             }
         }
 
-        if(url != null) return "redirect:"+url;
+        if (url != null) return "redirect:" + url;
         else return "redirect:/";
     }
 
     @RequestMapping("/changeUserPassword")
     public String changeUserPassword(@RequestParam(required = false) String url, String currentLogin, String currentPassword, String newPassword) {
 
-        if(newPassword.length() > 6 ){
+        if (newPassword.length() > 6) {
             if (userService.isLogCorrect(currentLogin, currentPassword)) {
-                if (userService.changePassword(currentLogin,currentPassword,newPassword)){
+                if (userService.changePassword(currentLogin, currentPassword, newPassword)) {
                     loggedUser = new User(currentLogin, newPassword);
                 }
             }
         }
 
-        if(url != null) return "redirect:"+url;
+        if (url != null) return "redirect:" + url;
         else return "redirect:/";
     }
-
 
     @RequestMapping("/logout")
     public String logout(@RequestParam(required = false) String url) {
         loggedUser = null;
-        if(url != null) return "redirect:"+url;
+        if (url != null) return "redirect:" + url;
         else return "redirect:/";
+    }
+
+    @RequestMapping(value = "/isLoggedIn", produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public String isLoggedIn() {
+        return Boolean.toString(isLogged());
     }
 
     public boolean isLogged() {
         return loggedUser != null;
     }
 
-    public User loggedUser(){
+    public User loggedUser() {
         return loggedUser;
     }
 

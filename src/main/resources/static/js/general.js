@@ -5,8 +5,10 @@ function darkMode() {
     $(".master-header").toggleClass("dark-mode");
     $("#signUpButton").toggleClass("dark-mode");
     $(".card").toggleClass("dark-mode");
+    $(".table").toggleClass("table-dark");
     isDarkMode = !isDarkMode;
 }
+
 
 $(document).ready(function () {
     $("#LogFormButton").click(function () {
@@ -42,11 +44,29 @@ $(document).ready(function () {
     });
 });
 
-function changePercentage(){
+
+function changePercentage(game) {
     $.ajax({
-        url: "solitaire/gameProgressPercentage",
+        url: game + "/gameProgressPercentage",
     }).done(function (percentage) {
         document.getElementById('GameProgressBar').style.width = percentage + '%';
+        if (parseInt(percentage) >= 100) {
+            $.ajax({
+                url: "isLoggedIn",
+            }).done(function (isLoggedIn) {
+                if (isLoggedIn === 'true')
+                    sendScore(game, true);
+                else sendScore(game, false);
+            });
+        }
+    });
+}
+
+function showTopScores(game) {
+    $.ajax({
+        url: "score/getTopScores?game=" + game,
+    }).done(function (html) {
+        $("#TopScoresTable").html(html);
     });
 }
 

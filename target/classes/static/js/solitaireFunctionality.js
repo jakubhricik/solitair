@@ -4,6 +4,8 @@ let hardMode;
 $(document).ready(isHardMode());
 $(document).ready(refreshGameBoard());
 $(document).ready(getAverageRating('solitaire'));
+$(document).ready(showTopScores('solitaire'));
+$(document).ready(updateComments('solitaire'));
 
 
 function startNewGame() {
@@ -15,7 +17,7 @@ function startNewGame() {
         url: "solitaire/new",
     }).done(function (html) {
         $("#gameBoard").html(html);
-        if(hardMode){
+        if (hardMode) {
             hardMode = !hardMode;
             $("#hardModeCheckbox").prop("checked", hardMode);
         }
@@ -53,27 +55,25 @@ function moveCards(source, destination, count) {
 
     $.ajax({
         url: "solitaire/moveCards?sourcePile=" + source + "&destinationPile=" + destination + "&numberOfCards=" + count,
-    }).done().then(()=>{
-            if(source.includes('foundation')){
-                foundation(sourcePile);
-            }
-            else if(source.includes('tableau')){;
-                tableau(sourcePile);
-            }
-            else if(source.includes('talon')){
-                stockTalon();
-            }
-            if(destination.includes('foundation')){
-                foundation(destinationPile);
-            }
-            else if(destination.includes('tableau')){
-                tableau(destinationPile);
-            }
-            reinitialize();
+    }).done().then(() => {
+        if (source.includes('foundation')) {
+            foundation(sourcePile);
+        } else if (source.includes('tableau')) {
+            ;
+            tableau(sourcePile);
+        } else if (source.includes('talon')) {
+            stockTalon();
+        }
+        if (destination.includes('foundation')) {
+            foundation(destinationPile);
+        } else if (destination.includes('tableau')) {
+            tableau(destinationPile);
+        }
+        reinitialize();
     });
 }
 
-function stockTalon(){
+function stockTalon() {
     $.ajax({
         url: "solitaire/talonStock",
     }).done(function (html) {
@@ -82,16 +82,16 @@ function stockTalon(){
     });
 }
 
-function isHardMode(){
+function isHardMode() {
     $.ajax({
         url: "solitaire/isHardMode",
     }).done(function (html) {
         hardMode = !!html.includes('true');
-        $( ".form-check-input" ).prop( "checked", hardMode );
+        $(".form-check-input").prop("checked", hardMode);
     });
 }
 
-function foundation(pile){
+function foundation(pile) {
     $.ajax({
         url: "solitaire/foundation?sourcePile=" + getPileNumber(pile),
     }).done(function (html) {
@@ -101,7 +101,7 @@ function foundation(pile){
     reinitialize();
 }
 
-function tableau(pile){
+function tableau(pile) {
     $.ajax({
         url: "solitaire/tableau?sourcePile=" + getPileNumber(pile),
     }).done(function (html) {
@@ -129,14 +129,14 @@ function changeCardsTheme() {
         url: "solitaire/cardTheme",
     }).done(function (html) {
         $("#gameBoard").html(html);
-        if (isDarkMode){
+        if (isDarkMode) {
             $(".card").toggleClass("dark-mode");
         }
         reinitialize();
     });
 }
 
-function toggleHardMode(){
+function toggleHardMode() {
     $.ajax({
         url: "solitaire/hardMode",
     }).done(function (html) {
@@ -146,18 +146,20 @@ function toggleHardMode(){
     });
 }
 
-function changeColHeight(){
+function changeColHeight() {
     const tableau = document.getElementById('tableauBoard');
     const cols = tableau.querySelectorAll('.col');
 
-    for( const col of cols){
+    for (const col of cols) {
         const cards = col.querySelectorAll('.card');
-        col.style.height = (cards.length * 50) + 100 +  'px';
+        col.style.height = (cards.length * 50) + 100 + 'px';
     }
 }
 
-function getPileNumber(pile){
-    for( let i = 0; i<7; i++){
-        if(pile.includes(i)) return i.toString() ;
+function getPileNumber(pile) {
+    for (let i = 0; i < 7; i++) {
+        if (pile.includes(i)) return i.toString();
     }
 }
+
+

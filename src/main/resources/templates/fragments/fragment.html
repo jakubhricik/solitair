@@ -12,12 +12,11 @@
 </div>
 
 
-
-<div id="LoginForm"  class="modal fade" tabindex="-1"  aria-hidden="true" th:fragment="login(url)">
-    <div class="modal-dialog modal-dialog-centered" >
+<div id="LoginForm" class="modal fade" tabindex="-1" aria-hidden="true" th:fragment="login(url)">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" >Log In</h5>
+                <h5 class="modal-title">Log In</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -25,10 +24,11 @@
                 <form action="/login" id="LogForm" method="post" class="logForm">
                     <input type="text" name="url" th:value="${url}" style="display: none">
                     <label for="LoginUsername">Username</label>
-                    <input id="LoginUsername" type="text" name="login"/><br/>
+                    <input id="LoginUsername" type="text" name="login" required/><br/>
                     <label for="LoginPassword">Password</label>
-                    <input id="LoginPassword" type="password" name="password"/><br/>
-                    <button type="button" id="LogFormButton" class="btn btn-success" style="margin-top: 10px" >Log In</button>
+                    <input id="LoginPassword" type="password" name="password" required/><br/>
+                    <button type="button" id="LogFormButton" class="btn btn-success" style="margin-top: 10px">Log In
+                    </button>
                 </form>
             </div>
 
@@ -36,7 +36,7 @@
     </div>
 </div>
 
-<div id="SignupForm" class="modal fade" tabindex="-1"  aria-hidden="true" th:fragment="signup(url)" >
+<div id="SignupForm" class="modal fade" tabindex="-1" aria-hidden="true" th:fragment="signup(url)">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -46,19 +46,23 @@
 
             <div class="modal-body">
                 <form action="/register" id="RegisterForm" method="post" class="logForm">
-                    <input type="text" name="url" th:value="${url}"  style="display: none">
+                    <input type="text" name="url" th:value="${url}" style="display: none">
                     <label for="SignUpUsername">Username</label>
-                    <input id="SignUpUsername" type="text" name="login" minlength="4" /><br/>
+                    <input id="SignUpUsername" type="text" name="login" minlength="4" required/><br/>
                     <label for="SignUpPassword">Password</label>
-                    <input id="SignUpPassword" type="password" name="password"  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"  placeholder="Min 8 characters, at least 1 letter and 1 number"/><br/>
-                    <button type="button" id="SignUpFormButton" class="btn btn-success"  style="margin-top: 10px">Sign Up</button>
+                    <input id="SignUpPassword" type="password" name="password"
+                           pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                           required placeholder="Min 8 characters, at least 1 letter and 1 number"/><br/>
+                    <button type="button" id="SignUpFormButton" class="btn btn-success" style="margin-top: 10px">Sign
+                        Up
+                    </button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<div id="LoginChange" class="modal fade" tabindex="-1"  aria-hidden="true" th:fragment="changeLogin(url)" >
+<div id="LoginChange" class="modal fade" tabindex="-1" aria-hidden="true" th:fragment="changeLogin(url)">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -68,21 +72,23 @@
 
             <div class="modal-body">
                 <form action="/changeUserName" id="ChangeNameForm" method="post" class="logForm">
-                    <input type="text" name="url" th:value="${url}"  style="display: none">
+                    <input type="text" name="url" th:value="${url}" style="display: none">
                     <label for="CurrentLogin">Current Name</label>
-                    <input id="CurrentLogin" type="text" name="currentLogin"/><br/>
+                    <input id="CurrentLogin" type="text" name="currentLogin" required/><br/>
                     <label for="CurrentPassword">Password</label>
-                    <input id="CurrentPassword" type="password" name="currentPassword"/><br/>
+                    <input id="CurrentPassword" type="password" name="currentPassword" required/><br/>
                     <label for="NewLogin">New Username</label>
-                    <input id="NewLogin" type="text" name="newLogin"/><br/>
-                    <button type="button" id="ChangeNameButton" class="btn btn-success"  style="margin-top: 10px">Change Username</button>
+                    <input id="NewLogin" type="text" name="newLogin" required/><br/>
+                    <button type="button" id="ChangeNameButton" class="btn btn-success" style="margin-top: 10px">Change
+                        Username
+                    </button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<div id="PasswordChange" class="modal fade" tabindex="-1"  aria-hidden="true" th:fragment="changePassword(url)" >
+<div id="PasswordChange" class="modal fade" tabindex="-1" aria-hidden="true" th:fragment="changePassword(url)">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -92,15 +98,18 @@
 
             <div class="modal-body">
                 <form action="/changeUserPassword" id="ChangePasswordForm" method="post" class="logForm">
-                    <input type="text" name="url" th:value="${url}"  style="display: none">
+                    <input type="text" name="url" th:value="${url}" style="display: none">
                     <label for="CurrentLogin1">Current Name</label>
-                    <input id="CurrentLogin1" type="text" name="currentLogin"/><br/>
+                    <input id="CurrentLogin1" type="text" name="currentLogin" required/><br/>
                     <label for="CurrentPassword1">Password</label>
-                    <input id="CurrentPassword1" type="password" name="currentPassword"/><br/>
+                    <input id="CurrentPassword1" type="password" name="currentPassword" required/><br/>
                     <label for="NewPassword">New Password</label>
-                    <input id="NewPassword" type="password" name="newPassword" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-                           placeholder="Min 8 characters, at least 1 letter and 1 number"/><br/>
-                    <button type="button" id="ChangePasswordButton" class="btn btn-success"  style="margin-top: 10px">Change Password</button>
+                    <input id="NewPassword" type="password" name="newPassword"
+                           pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                           placeholder="Min 8 characters, at least 1 letter and 1 number" required/><br/>
+                    <button type="button" id="ChangePasswordButton" class="btn btn-success" style="margin-top: 10px">
+                        Change Password
+                    </button>
                 </form>
             </div>
         </div>
@@ -108,12 +117,46 @@
 </div>
 
 
+<div th:fragment="featureGame(gameName, gameInfo, gameLink, gameAuthor)" class="container featuredGame">
+    <div class="card text-center">
+        <div class="card-header">
+            Featured
+        </div>
+        <div class="card-body">
+            <h5 class="card-title"><b th:text="${gameName}"/></h5>
+            <p class="card-text" th:text="${gameInfo}"/>
+            <a th:href="${gameLink}" class="btn btn-warning">Play Game</a>
+        </div>
+        <div class="card-footer text-muted">
+            Game made by: <b th:text="${gameAuthor}"/>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="gameCard(gameName, imageSource , gameInfo, gameLink, gameAuthor)" class="gamesCards">
+    <div class="card">
+        <img th:src="${imageSource}" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${gameName}"/>
+            <p class="card-text" th:text="${gameInfo}"/>
+        </div>
+        <div class="card-body">
+            <a th:href="${gameLink}" class="card-link">Play Game</a>
+        </div>
+    </div>
+
+</div>
+
 
 <div th:fragment="loginButtons(urlAddress)">
-    <div id="logIn" class="text-end btn-group shadow" role="group" th:if="not ${@userController.logged}" >
-        <button type="button" class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#LoginForm" >Login</button>
-        <button type="button" class="btn btn-light" role="button" data-bs-toggle="modal" data-bs-target="#SignupForm">Sign-up</button>
-        <button type="button"  onclick="darkMode()"  role="button" class="btn btn-dark" >
+    <div id="logIn" class="text-end btn-group shadow" role="group" th:if="not ${@userController.logged}">
+        <button id="LogInButton" type="button" class="btn btn-warning" role="button" data-bs-toggle="modal"
+                data-bs-target="#LoginForm">Login
+        </button>
+        <button id="SignUpButton" type="button" class="btn btn-light" role="button" data-bs-toggle="modal"
+                data-bs-target="#SignupForm">Sign-up
+        </button>
+        <button type="button" onclick="darkMode()" role="button" class="btn btn-dark">
             <img src="/images/icons/dark-mode-icon.png" alt="dark mode icon" style="width: 20px; color: white">
         </button>
     </div>
@@ -121,25 +164,30 @@
     <div th:replace="/fragments/fragment::login(url = ${urlAddress})"></div>
     <div th:replace="/fragments/fragment::signup(url = ${urlAddress})"></div>
 
-    <div id="logOut" class="text-end dropstart btn-group shadow" role="group" th:if="${@userController.logged}" >
+    <div id="logOut" class="text-end dropstart btn-group shadow" role="group" th:if="${@userController.logged}">
 
 
-        <button id="userButton" type="button" class="btn btn-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="/images/icons/user-icon.svg"  alt="user icon">
+        <button id="userButton" type="button" class="btn btn-light" data-bs-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            <img src="/images/icons/user-icon.svg" alt="user icon">
         </button>
 
         <div class="dropdown-menu" id="LogOutMenu">
-            <p class="userName" th:text="${@userController.loggedUser().login}" />
+            <p class="userName" th:text="${@userController.loggedUser().login}"/>
 
-            <button type="button" class="dropdown-item" role="button" data-bs-toggle="modal" data-bs-target="#LoginChange">Change Username</button>
-            <button type="button" class="dropdown-item" role="button" data-bs-toggle="modal" data-bs-target="#PasswordChange">Change Password</button>
+            <button type="button" class="dropdown-item" role="button" data-bs-toggle="modal"
+                    data-bs-target="#LoginChange">Change Username
+            </button>
+            <button type="button" class="dropdown-item" role="button" data-bs-toggle="modal"
+                    data-bs-target="#PasswordChange">Change Password
+            </button>
 
             <div class="dropdown-divider"></div>
             <form action="/logout">
-                <input type="text" name="url" th:value="${urlAddress}"  style="display: none">
-                <button type="submit"  class="btn btn-danger dropdown-item">
+                <input type="text" name="url" th:value="${urlAddress}" style="display: none">
+                <button type="submit" class="btn btn-danger dropdown-item">
                     <span style="float: left">
-                        <img src="/images/icons/logout-icon.svg"  alt="logout icon">
+                        <img src="/images/icons/logout-icon.svg" alt="logout icon">
                     </span>
                     <p style="margin-left: 45px">
                         Log Out
@@ -151,13 +199,11 @@
         <div th:replace="/fragments/fragment::changePassword(url = ${urlAddress})"></div>
 
 
-        <button type="button"  onclick="darkMode()"  role="button" class="btn btn-dark" >
+        <button type="button" onclick="darkMode()" role="button" class="btn btn-dark">
             <img src="/images/icons/dark-mode-icon.png" alt="dark mode icon" style="width: 20px; color: white">
         </button>
     </div>
 </div>
-
-
 
 
 </html>

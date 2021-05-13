@@ -3,36 +3,36 @@
 <!--/*@thymesVar id="userController" type="sk.tuke.kpi.kp.gamestudio.server.controller.UserController"*/-->
 <!--/*@thymesVar id="solitaireController" type="sk.tuke.kpi.kp.gamestudio.server.controller.SolitaireController"*/-->
 
-<form th:fragment="rating-form(url, game, player)" id="RatingForm" class="rating" action="/rating/rateGame" >
+<form th:fragment="rating-form(url, game, player)" id="RatingForm" class="rating" action="/rating/rateGame">
 
-  <span class="tooltipCustom badge rounded-pill bg-success">Rate this Game</span>
+    <span class="tooltipCustom badge rounded-pill bg-success">Rate this Game</span>
 
-  <input type="text" name="url" th:value="${url}">
-  <input type="text" name="game" th:value="${game}">
-  <input type="text" name="player" th:value="${player}">
+    <input type="text" name="url" th:value="${url}">
+    <input type="text" name="game" th:value="${game}">
+    <input type="text" name="player" th:value="${player}">
 
-  <input type="radio" onclick="sendRating()" name="rating" value="5" id="5">
-  <label for="5">☆</label>
-  <input type="radio" onclick="sendRating()" name="rating" value="4" id="4">
-  <label for="4">☆</label>
-  <input type="radio" onclick="sendRating()" name="rating" value="3" id="3">
-  <label for="3">☆</label>
-  <input type="radio" onclick="sendRating()" name="rating" value="2" id="2">
-  <label for="2">☆</label>
-  <input type="radio" onclick="sendRating()" name="rating"  value="1" id="1">
-  <label for="1">☆</label>
+    <input type="radio" onclick="sendRating()" name="rating" value="5" id="5">
+    <label for="5">☆</label>
+    <input type="radio" onclick="sendRating()" name="rating" value="4" id="4">
+    <label for="4">☆</label>
+    <input type="radio" onclick="sendRating()" name="rating" value="3" id="3">
+    <label for="3">☆</label>
+    <input type="radio" onclick="sendRating()" name="rating" value="2" id="2">
+    <label for="2">☆</label>
+    <input type="radio" onclick="sendRating()" name="rating" value="1" id="1">
+    <label for="1">☆</label>
 </form>
 
-<div th:fragment="disabled-rating"  class="rating not-allowed"  >
-  <span class="tooltipCustom badge rounded-pill bg-warning">Need to Login</span>
-  <label >☆</label>
-  <label >☆</label>
-  <label >☆</label>
-  <label >☆</label>
-  <label >☆</label>
+<div th:fragment="disabled-rating" class="rating not-allowed">
+    <span class="tooltipCustom badge rounded-pill bg-warning">Please Login</span>
+    <label>☆</label>
+    <label>☆</label>
+    <label>☆</label>
+    <label>☆</label>
+    <label>☆</label>
 </div>
 
-<div th:fragment="average-rating" id="AverageRating" class="gameRating" />
+<div th:fragment="average-rating" id="AverageRating" class="gameRating"/>
 
 
 </html>

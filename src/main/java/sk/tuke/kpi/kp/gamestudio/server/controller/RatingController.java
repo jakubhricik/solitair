@@ -21,18 +21,18 @@ public class RatingController {
     @Autowired
     private RatingService ratingService;
 
-    @RequestMapping(value = "/getAverageRating", produces = MediaType.TEXT_HTML_VALUE )
+    @RequestMapping(value = "/getAverageRating", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String getAverageRating(@RequestParam String game) {
         StringBuilder sb = new StringBuilder();
         int countOfStars = 5;
-        for (int filledStar = 0; filledStar < ratingService.getAverageRating(game); filledStar++){
+        for (int filledStar = 0; filledStar < ratingService.getAverageRating(game); filledStar++) {
             sb.append("<span class='star filedStar'> \n");
             sb.append("☆");
             sb.append("</span> \n");
             countOfStars--;
         }
-        while(countOfStars != 0){
+        while (countOfStars != 0) {
             sb.append("<span class='star'> \n");
             sb.append("☆");
             sb.append("</span> \n");
@@ -42,20 +42,20 @@ public class RatingController {
     }
 
     @RequestMapping("/rateGame")
-    public String raeGame(@RequestParam(required = false) String url,
-                          @RequestParam String game,
-                          @RequestParam String player,
-                          @RequestParam int rating){
+    public String rateGame(@RequestParam(required = false) String url,
+                           @RequestParam String game,
+                           @RequestParam String player,
+                           @RequestParam int rating) {
         Rating gameRating = new Rating(game, player, rating, new Date());
         ratingService.setRating(gameRating);
 
-        if(url != null) return "redirect:"+url;
+        if (url != null) return "redirect:" + url;
         else return "redirect:/";
     }
 
     @RequestMapping("/getRating")
     @ResponseBody
-    public int getRating(@RequestParam String game, @RequestParam String player){
+    public int getRating(@RequestParam String game, @RequestParam String player) {
         return ratingService.getRating(game, player);
     }
 }

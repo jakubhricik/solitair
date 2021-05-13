@@ -28,17 +28,17 @@ public class GameStudioServer {
     }
 
     @Bean
-    public CommentService commentService(){
+    public CommentService commentService() {
         return new CommentServiceJPA();
     }
 
     @Bean
-    public RatingService ratingService(){
+    public RatingService ratingService() {
         return new RatingServiceJPA();
     }
 
     @Bean
-    public UserService userService(){
+    public UserService userService() {
         return new UserServiceJPA();
     }
 }

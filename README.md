@@ -26,3 +26,7 @@ ovladanie hry
 - https://youtu.be/NuXm5qB65DY
     - video obsahuje spustenie servera, nahodenie dat do databazy pomocou post http a zidkanie dat pomocou get,
     spustenie clienta a ziskavanie informacii zo servra priamo v konzolovom rozhrani
+- https://youtu.be/UKbxTpX1E1Q
+    - video pbsahuje ukazku hrania hry vo wbovom prehliadaci. Hra je hratelna, hrac sa moze prihlasit, registrovat
+  zmenit pozadie na tmavy rezim, zmenit si heslo a meno. Pri hrani hry je mozne si zvolit normalnu alebo tazku obtiaznost
+      , skore sa ulozi iba ak je hrac prihlaseny, a komentar moze pridat takisto iba prihlaseny hrac.

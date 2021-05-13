@@ -31,7 +31,7 @@ public class SpringClient {
     }
 
     @Bean
-    public CommandLineRunner runner(ConsoleUi ui, GameBoard gameBoard ) {
+    public CommandLineRunner runner(ConsoleUi ui, GameBoard gameBoard) {
         return args -> ui.play(gameBoard);
     }
 
@@ -65,12 +65,12 @@ public class SpringClient {
     }
 
     @Bean
-    public UserService userService(){
+    public UserService userService() {
         return new UserServiceJPA();
     }
 
     @Bean
-    public RestTemplate restTemplate(){
+    public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 }

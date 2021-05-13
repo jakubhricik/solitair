@@ -1,8 +1,7 @@
 
-
 :root {
     --backgroundLight: #f2f6fc;
-    --backgroundDark: rgba(34,39,46,0.95);
+    --backgroundDark: rgba(34, 39, 46, 0.95);
 
     --textLight: #212529;
     --textDark: #ced4da;
@@ -15,7 +14,7 @@
 }
 
 
-body{
+body {
     margin: 0;
     font-size: 1rem;
     font-weight: 400;
@@ -28,47 +27,49 @@ body{
     "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-body.dark-mode{
+body.dark-mode {
     color: var(--textDark);
     background-color: var(--backgroundDark);
 }
 
 
 body.dark-mode label,
-body.dark-mode h5{
+body.dark-mode h5 {
     color: var(--secondaryDark);
 }
 
-#GameStudio{
+#GameStudio {
     margin: 10px;
     height: 50px;
 }
 
 .master-header,
-.footer{
+.footer {
     background-color: var(--backgroundLight);
     border-bottom: var(--secondaryLight) 2px solid;
     box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
 }
 
 
-.footer{
+.footer {
     border-radius: 5px;
 }
 
 
 .master-header.dark-mode,
 body.dark-mode .game-control-header,
-body.dark-mode .footer{
+body.dark-mode .footer {
     color: var(--textDark);
     background-color: var(--secondaryDark);
     border-bottom: none;
     box-shadow: none;
 }
-.master-header.dark-mode .navbar-brand{
-    color: #ced4da ;
+
+.master-header.dark-mode .navbar-brand {
+    color: #ced4da;
 }
-.master-header.dark-mode .navbar-brand img{
+
+.master-header.dark-mode .navbar-brand img {
     border-radius: 50%;
     padding: 10px;
     background-color: #ced4da;
@@ -79,7 +80,7 @@ body.dark-mode .footer{
     color: #dee2e6;
 }
 
-.game-control-header{
+.game-control-header {
     background-color: #f8f9fa;
     border-bottom: solid 2px #6c757d;
     border-top-left-radius: 5px;
@@ -89,27 +90,28 @@ body.dark-mode .footer{
     margin-top: 20px;
 }
 
-body.dark-mode .game-control-header label{
+body.dark-mode .game-control-header label {
     color: #ced4da;
 }
 
-body.dark-mode .game-control-header .badge{
+body.dark-mode .game-control-header .badge {
     color: var(--textLight);
 }
 
-.progress{
+.progress {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     height: 8px;
     box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
     background-color: white;
 }
-body.dark-mode .progress{
+
+body.dark-mode .progress {
     background-color: var(--backgroundDark);
 }
 
 
-.gameName{
+.gameName {
     line-height: normal;
     font-size: 2.25rem;
     font-weight: 500;
@@ -119,75 +121,211 @@ body.dark-mode .progress{
     margin-top: 20px;
 }
 
-body.dark-mode .gameName{
+body.dark-mode .gameName {
     color: var(--primariDark);
 }
 
-.page-header-subtitle{
+.page-header-subtitle {
     color: var(--secondaryDark);
     font-size: 1.15rem;
     margin-top: 0.25rem;
 }
 
-body.dark-mode .page-header-subtitle{
+body.dark-mode .page-header-subtitle {
     color: var(--textDark);
 }
 
 
-
-.gameRating{
+.gameRating {
     margin-left: 10px;
     display: inline-block;
     position: relative;
     bottom: 3px;
 }
 
-.content{
+.content {
     width: 920px;
     margin: 0 auto;
 }
 
 
- #logIn{
-     float: right;
- }
+#logIn {
+    float: right;
+}
 
- #navbarNavDropdown{
-     display: inline-block;
-     float: left;
- }
+#navbarNavDropdown {
+    display: inline-block;
+    float: left;
+}
 
- .logForm label{
-     display: block;
- }
+.logForm label {
+    display: block;
+}
 
- .logForm input{
-     display: block;
-     width: 100%;
- }
+.logForm input {
+    display: block;
+    width: 100%;
+}
 
- #logOut #userButton{
-     width: 50px;
- }
+#logOut #userButton {
+    width: 50px;
+}
 
- #LogOutMenu{
-     right: -7px;
-     top: -5px;
- }
+#LogOutMenu {
+    right: -7px;
+    top: -5px;
+}
 
- .userName{
+.userName {
     text-align: center;
     font-weight: bold;
-     font-size: large;
- }
+    font-size: large;
+}
+
+#CommentForm {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#CommentForm textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: var(--backgroundLight);
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+    border: 1px solid var(--secondaryDark);
+    border-radius: 5px;
+}
 
 
- .shadow{
-     box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
- }
+#CommentForm label {
+    color: var(--secondaryDark);
+}
 
-@media (max-width: 992px) {
-    .content{
-        width: 100%;
+#CommentForm b {
+    color: var(--textLight);
+    font-size: 20px;
+}
+
+body.dark-mode #CommentForm label {
+    color: var(--textLight);
+}
+
+body.dark-mode #CommentForm b {
+    color: var(--textDark);
+    font-size: 20px;
+}
+
+body.dark-mode #CommentForm textarea {
+    background-color: var(--backgroundDark);
+    box-shadow: none;
+}
+
+body.dark-mode #CommentForm {
+    background-color: var(--secondaryDark);
+    box-shadow: none;
+}
+
+
+#CommentsPlace {
+    margin-bottom: 20px;
+}
+
+#CommentsPlace button {
+    margin-right: 20px;
+}
+
+.comment {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.comment i {
+    color: var(--secondaryLight);
+}
+
+.comment h2 {
+    color: var(--primariDark);
+}
+
+body.dark-mode .comment i {
+    color: var(--textLight);
+}
+
+body.dark-mode .comment {
+    background-color: var(--secondaryDark);
+    box-shadow: none;
+}
+
+.gamesCards {
+    margin: 0 auto;
+    width: 30rem;
+    padding: 20px;
+}
+
+.gamesCards > .card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+}
+
+.gamesCards > .card.dark-mode {
+    box-shadow: none;
+    background-color: var(--secondaryDark);
+}
+
+
+.featuredGame {
+    margin-top: 20px;
+}
+
+.featuredGame > .card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+}
+
+.featuredGame > .card.dark-mode {
+    background-color: var(--secondaryDark);
+    box-shadow: none;
+}
+
+.featuredGame > .card.dark-mode b {
+    color: var(--primariDark);
+}
+
+.shadow {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+}
+
+.table {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+}
+
+
+@media (max-width: 1200px) {
+    .gamesCards {
+        width: 22rem;
     }
 }
+
+
+@media (max-width: 992px) {
+    .content {
+        width: 100%;
+    }
+
+    .gamesCards {
+        width: 19rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .gamesCards {
+        width: 30rem;
+    }
+}
+
+

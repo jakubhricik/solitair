@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="userController" type="sk.tuke.kpi.kp.gamestudio.server.controller.UserController"*/-->
+<!--/*@thymesVar id="solitaireController" type="sk.tuke.kpi.kp.gamestudio.server.controller.SolitaireController"*/-->
+
+<div th:fragment="comments(game)" id="CommentsPlace">
+    <div id="GameComments"></div>
+    <button th:onclick="previousPage(game)" class="btn btn-secondary" id="PrevPageBtn"> < Previous Page</button>
+    <button th:onclick="nextPage(game)" class="btn btn-secondary" id="NextPageBtn">Next Page ></button>
+</div>
+
+<form th:fragment="commentGame(url, game, player)" id="CommentForm" action="/comment/addComment" class="container">
+
+    <b>Commenting as : <span th:text="${player}"/></b><br>
+
+    <input type="text" name="url" th:value="${url}" style="display: none">
+    <input type="text" name="game" th:value="${game}" style="display: none">
+    <input type="text" name="player" th:value="${player}" style="display: none">
+
+    <label for="Comment">Write comment:</label><br>
+    <textarea name="commentText" id="Comment" cols="30" rows="4" maxlength="254" required></textarea><br>
+
+    <button type="submit" class="btn btn-success">Comment</button>
+
+</form>
+
+</html>

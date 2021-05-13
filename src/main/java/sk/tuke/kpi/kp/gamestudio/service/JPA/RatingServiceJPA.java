@@ -17,11 +17,11 @@ public class RatingServiceJPA implements RatingService {
 
     @Override
     public void setRating(Rating rating) throws RatingException {
-        if (rating == null) throw new  RatingException("Rating null parameter");
+        if (rating == null) throw new RatingException("Rating null parameter");
         updateRating(rating);
     }
 
-    private void updateRating(@NotNull Rating rating){
+    private void updateRating(@NotNull Rating rating) {
         int oldRating = getRating(rating.getGame(), rating.getPlayer());
         if (oldRating != 0) {
             entityManager.createNamedQuery("Rating.updateRating")
@@ -35,22 +35,22 @@ public class RatingServiceJPA implements RatingService {
 
     @Override
     public int getAverageRating(String game) throws RatingException {
-        try{
-            return (int) Math.round((double)entityManager.createNamedQuery("Rating.getAverageRating")
-                    .setParameter("game",game).getSingleResult());
-        }catch (Exception e){
+        try {
+            return (int) Math.round((double) entityManager.createNamedQuery("Rating.getAverageRating")
+                    .setParameter("game", game).getSingleResult());
+        } catch (Exception e) {
             throw new RatingException("This game is not Rated jet");
         }
     }
 
     @Override
     public int getRating(String game, String player) throws RatingException {
-        try{
+        try {
             return (int) entityManager.createNamedQuery("Rating.getRatingByName")
                     .setParameter("game", game)
                     .setParameter("player", player)
                     .getSingleResult();
-        }catch (Exception e){
+        } catch (Exception e) {
             return 0;
         }
     }

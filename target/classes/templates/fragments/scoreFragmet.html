@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="userController" type="sk.tuke.kpi.kp.gamestudio.server.controller.UserController"*/-->
+<!--/*@thymesVar id="solitaireController" type="sk.tuke.kpi.kp.gamestudio.server.controller.SolitaireController"*/-->
+
+<form th:fragment="score-form(url, game, player)" id="ScoreForm" action="/score/saveScore">
+
+    <input type="text" name="url" th:value="${url}">
+    <input type="text" name="game" th:value="${game}">
+    <input type="text" name="player" th:value="${player}">
+    <input type="text" name="points" id="ScorePoints" value="0">
+</form>
+
+</html>
